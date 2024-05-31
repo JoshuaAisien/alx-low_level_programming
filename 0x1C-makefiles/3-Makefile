@@ -1,0 +1,30 @@
+.PHONY: all clean oclean fclean re
+
+CC = gcc
+SRC := $(wildcard *.c)
+OBJ := $(SRC:.c=.o)
+NAME = school
+RM = rm -f
+
+all : $(NAME)
+
+$(NAME) : $(OBJ)
+	$(CC) $(OBJ) -o $(NAME)
+
+%.o : %.c
+	$(CC) -c $< -o $@
+	
+clean :
+	@echo " deleting school and tempoarary files creatred by VIM and EMACS" 
+	$(RM) $(NAME) *~ \#*\# 
+
+oclean :
+	@echo "deleting object"
+	$(RM) $(OBJ)
+
+fclean: clean oclean
+	@echo "deleting temporary files, executable and object files"
+
+re: fclean all
+
+	
